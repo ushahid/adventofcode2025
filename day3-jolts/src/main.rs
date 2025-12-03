@@ -3,23 +3,6 @@ use std::cmp::Ordering;
 
 
 
-// fn find_max_with_idx(list: &Vec<char>, skip_last: usize) -> (usize, char){
-//     let mut max = '0';
-//     let mut max_idx = 0;
-//     for (idx, val) in list.iter().enumerate() {
-//         if idx >= list.len() - skip_last {
-//             break;
-//         }
-//         if (*val) > max {
-//             max = val.clone();
-//             max_idx = idx;
-//         }
-//     }
-//     return (max_idx, max)
-// }
-
-
-
 fn get_jolts(vec: &Vec<u64>, num_batteries: usize) -> u64{
     let mut num: u64 = 0;
     let mut max_idx: usize = 0;
