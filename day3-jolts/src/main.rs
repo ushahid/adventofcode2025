@@ -15,7 +15,7 @@ fn get_jolts(vec: &Vec<u64>, num_batteries: usize) -> u64{
                                             match val_cmp {
                                                 Ordering::Less => Ordering::Less,
                                                 Ordering::Greater => Ordering::Greater,
-                                                Ordering::Equal => right_idx.cmp(left_idx)
+                                                Ordering::Equal => left_idx.cmp(right_idx).reverse()
                                             }
                                         }).unwrap();
         num += max * 10_u64.pow(i as u32);
@@ -33,7 +33,9 @@ fn main() {
         sum += get_jolts(&vec, 2);
     }
     println!("Part 1 answer: {}", sum);
-        for line in data.lines() {
+    
+    sum = 0;
+    for line in data.lines() {
         let vec: Vec<u64> = line.chars().map(|x| x.to_digit(10).unwrap() as u64).collect();
         sum += get_jolts(&vec, 12);
     }
