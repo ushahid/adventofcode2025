@@ -35,7 +35,7 @@ fn main() {
     let mut num_ids = 0_u64;
     for id in data[1].lines() {
         let num_id = id.parse::<u64>().unwrap();
-        let res  = ranges.binary_search_by(|&(start, end)| {
+        if let Ok(_res)  = ranges.binary_search_by(|&(start, end)| {
             if num_id >= start && num_id <= end {
                 Ordering::Equal
             } else if start > num_id {
@@ -43,16 +43,15 @@ fn main() {
             } else {
                 Ordering::Less
             }
-        });
-        if res.is_ok() {
+        }) {
             num_ids += 1;
         }
     }
     println!("Fresh ingredients: {}", num_ids);
 
-    let mut total_ids = 0_u128;
+    let mut total_ids = 0;
     for range in ranges.iter() {
-        total_ids += range.1 as u128 - range.0 as u128 + 1_u128
+        total_ids += range.1 as u64 - range.0 as u64 + 1_u64;
     }
     println!("Total ids: {}", total_ids);
 
