@@ -19,7 +19,7 @@ fn main() {
             match op {
                 "+" => add_ans += iterators[i].next().unwrap().parse::<u64>().unwrap(),
                 "*" => mul_ans *= iterators[i].next().unwrap().parse::<u64>().unwrap(),
-                _ => panic!("Invalid operand")
+                _ => panic!("Invalid operator {}", op)
             } 
         }
         if op == "+" {
@@ -29,7 +29,7 @@ fn main() {
         }
     }
     println!("Part 1 sum {}", sum);
-    println!("Part 1 time: {}", p1_start.elapsed().as_micros());
+    println!("Part 1 time: {} µs", p1_start.elapsed().as_micros());
 
 
     let p2_start = Instant::now();
@@ -58,13 +58,13 @@ fn main() {
             match op {
                 '+' => sum_result += num,
                 '*' => mul_result *= num,
-                _ => panic!("Invalid operand {}", op)
+                _ => panic!("Invalid operator {}", op)
             }
         } else {
             match op {
                 '+' => sum += sum_result,
                 '*' => sum += mul_result,
-                _ => panic!("Invalid operand {}", op)
+                _ => panic!("Invalid operator {}", op)
             }
             mul_result = 1;
             sum_result = 0;
@@ -77,6 +77,6 @@ fn main() {
         _ => panic!("Invalid operand {}", op)
     }
     println!("Part 2 sum {}", sum);
-    println!("Part 2 time: {}", p2_start.elapsed().as_micros());
+    println!("Part 2 time: {} µs", p2_start.elapsed().as_micros());
 
 }
