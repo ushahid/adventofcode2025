@@ -1,0 +1,7 @@
+[package]
+name = "day11-reactor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+topo_sort = "0.4.0"
