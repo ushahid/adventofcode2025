@@ -76,23 +76,31 @@ fn main() {
     }
     println!("Part 1 answer: {}", total);
 
+    let mut all_total = 0;
     for i in 0..all_joltages.len() {
         let mut vars_vec: Vec<Variable> = Vec::new();
         let mut vars = variables!();
         let mut constraints = Vec::new();
         // Add number of times each switch is pressed as a variable
-        for (idx, joltage) in all_joltages[i].iter().enumerate() {
+        for _ in 0..all_switches[i].len() {
             vars_vec.push(vars.add(variable().integer().min(0)));
+        }
 
+        // Add joltage constraints
+        for (idx, joltage) in all_joltages[i].iter().enumerate() {
             let mut sum: Expression = 0.into();
             // Go through each switch combination and add as needed
             for (switch_idx, switches) in all_switches[i].iter().enumerate() {
                 if switches.contains(&(idx as u64)) {
+                    // println!("{:?}", all_switches[i]);
+                    // println!("{} {}", switch_idx, vars_vec.len());
                     sum += vars_vec[switch_idx];
                 }
             }
-            constraints.push(constraint!(sum == ((*joltage) as u32)));
+            constraints.push(constraint!(sum == (*joltage as u32)));
         }
+
+        // Calculate optimization objective
         let mut total_presses: Expression = 0.into();
         for var in vars_vec.iter() {
             total_presses += var
@@ -102,6 +110,7 @@ fn main() {
         for var in vars_vec.iter() {
             total_presses += solution.value(*var) as u64;
         }
-        println!("Solution is {}", total_presses);
+        all_total += total_presses;
     }
+    println!("Part 2 answer {}", all_total);
 }
